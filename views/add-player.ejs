@@ -1,0 +1,76 @@
+<% include partials/header.ejs %>
+    <div class="container">
+        <% if (message != '') { %>
+            <p class="text-center text-danger"><%= message %></p>
+        <% } %>
+        <form class="add-player-form" action="" method="post" enctype="multipart/form-data">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <input type="text" class="form-control" name="first_name" id="first-name" placeholder="First Name" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <input type="text" class="form-control" name="last_name" id="last-name" placeholder="Last Name" required>
+                </div>
+                <!-- <div class="form-group col-md-6">
+                    <input type="text" class="form-control" name="username" id="username" placeholder="Username" required>
+                </div> -->
+                <div class="form-group col-md-6">
+                    <input type="email" class="form-control" name="email" id="email" placeholder="E-Mail" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <input type="number" class="form-control" name="contact_number" id="contact_number" placeholder="Conatct Number" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <input type="number" class="form-control" name="number_of_guests" id="number_of_guests" placeholder="Number of Guests" required>
+                </div>
+
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <input type="text" class= 'form-control' name="daterange" value="01/01/2018 - 01/15/2018" />
+                    <!-- <input type="date" class="form-control" name="check_in" id="check_in" placeholder="Check in" value=""> -->
+                </div>
+                <div class="form-group col-md-6">
+                    <input type="date" class="form-control" name="check_out" id="check_out" placeholder="Check out" >
+                </div>
+                <div class="form-group col-md-6">
+                    <input list="spot"id="location" name="location" class="form-control" placeholder="Choose the loction" required autocomplete=off>
+                        <datalist id="spot">
+                            <option>Kochin</option>
+                            <option>Mumbai</option>
+                            <option>Lonavala</option>
+                            <option>Sunderbans</option>
+                            <option>Gir</option>
+                            <option>Andaman & Nicobar</option>
+                            <option>Uttrakhand</option>
+                            <option>Leh Ladakh</option>
+                            <option>Ganges</option>
+                            <option>4-Dham  </option>
+                        </datalist>                        
+                    
+                </div>
+                <!-- <div class="col-md-12">
+                    <label for="player-img"><b>Player Image</b></label><br>
+                    <input type="file" name="image" id="player-img" class="">
+                </div> -->
+            </div>
+            <button type="submit" class="btn btn-primary float-right">Add a Journey</button>
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>  
+
+<script>
+$(function() {
+  $('input[name="daterange"]').daterangepicker({
+    opens: 'left'
+  }, function(start, end, label) {
+    console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+  });
+});
+</script>
+</body>
+</html>

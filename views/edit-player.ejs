@@ -1,0 +1,53 @@
+<% include partials/header.ejs %>
+<div class="container">
+    <% if (message) { %>
+        <p class="text-center text-danger"><%= message %></p>
+    <% } %>
+
+    <% if (player) { %>
+        <form class="add-player-form" action="" method="post" enctype="multipart/form-data">
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="first-name">First Name</label>
+                    <input type="text" class="form-control" name="first_name" id="first-name" value="<%= player.first_name %>" required>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="last-name">Last Name</label>
+                    <input type="text" class="form-control" name="last_name" id="last-name" value="<%= player.last_name %>" required>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" name="username" id="username" value="<%= player.username %>" required disabled title="Username can't be changed">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="number">Number</label>
+                    <input type="number" class="form-control" name="number" id="number" placeholder="Number" value="<%= player.number %>" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <input list="pasta"id="location" name="location" class="form-control" placeholder="Choose the loction" required autocomplete=off>
+                        <datalist id="pasta">
+                            <option>Kochin</option>
+                            <option>Mumbai</option>
+                            <option>Lonavala</option>
+                            <option>Sunderbans</option>
+                            <option>Gir Forest</option>
+                            <option>Andaman & Nicobar</option>
+                            <option>Uttrakhand</option>
+                            <option>Leh Ladakh</option>
+                            <option>Ganges</option>
+                            <option>4-Dham  </option>
+                        </datalist>                        
+                    
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success float-right">Update Journey</button>
+        </form>
+    <% } else { %>
+        <p class="text-center">Journey Not Found. Go <a href="/add">here</a> to make a trip.</p>
+    <% } %>
+</div>
+</div>
+</body>
+</html>
