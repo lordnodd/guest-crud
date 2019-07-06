@@ -1,15 +1,14 @@
-const fs = require('fs');
-
+const moment = require('moment');
 module.exports = {
     addPlayerPage: (req, res) => {
+        
         res.render('add-player.ejs', {
-            title: "ass Journey | Guest CRUD",message: ''
+            title: "Enquiry Form",message: ''
         });
+        console.log(moment().format('MM Do YYYY, h:mm:ss '));
+        
     },
     addPlayer: (req, res) => {
-        // if (!req.files) {
-        //     return res.status(400).send("No files were uploaded.");
-        // }
 
         var message = '';
         var first_name = req.body.first_name;
@@ -19,57 +18,31 @@ module.exports = {
         var contact_number = req.body.contact_number;
         var number_of_guests= req.body.number_of_guests;
         var location = req.body.location;   
-        var check_in = req.body.daterange;
-        var check_out = req.body.check_out;
-        //console.log(typeOf(check_in));
-        
-        //var uploadedFile = req.files.image;
-        //var image_name = uploadedFile.name;
-        // var fileExtension = uploadedFile.mimetype.split('/')[1];
-        // image_name = username + '.' + fileExtension;
+        var daterange = req.body.daterange;
+        daterange = daterange.split(" - ");
+        var check_in = daterange[0];
+        var check_out = daterange[1];
+        var created_at = moment().format('YYYY-MM-DD hh:mm:ss');
+        var dummy = 0;
+        console.log(daterange, check_out, check_in);
+        check_in = moment(check_in).format('YYYY-MM-DD').toString();
+        check_out = moment(check_out).format('YYYY-MM-DD').toString();
+    
 
-        var usernameQuery = "SELECT * FROM `booking_queries` WHERE email = '" + email + "'";
-        // var getall = "SELECT "
-        db.query(usernameQuery, (err, result) => {
+        console.log(daterange, check_out, check_in);
+        var query = "INSERT INTO `booking_queries` (firstname, lastname, property_id, no_of_nights, total_cost, villa_cost, email, mobile_number, no_of_guests, vista_name, checkin, checkout, created_at, updated_at) VALUES ('" +
+        first_name + "', '" + last_name + "', '"  + dummy + "', '"  + ++dummy + "', '"  + dummy + "', '"  + dummy + "', '"  + email + "', '" + contact_number + "', '" + number_of_guests + "', '" + location + "', '" + check_in + "', '" + check_out + "', '" + created_at + "', '" + created_at + "')";
+        console.log(query);
+        db.query(query, (err, result) => {
             if (err) {
                 return res.status(500).send(err);
             }
-            if (result.length > 0) {
-                message = 'Username already exists';
-                res.render('add-player.ejs', {message,
-                    title: "ADDING | Guest CRUD"
-                });
-            } else {//"INSERT INTO `booking_queries` (firstname, last name, username, email, contact_number, number_of_guests, location, check_in, check_out) VALUES ('"
-                var query = "INSERT INTO `booking_queries` (firstname, lastname, email, mobile_number, no_of_guests, vista_name, checkin, checkout) VALUES ('" +
-                first_name + "', '" + last_name + "', '"  + email + "', '" + contact_number + "', '" + number_of_guests + "', '" + location + "', '" + check_in + "', '" + check_out + "')";
-            
-                db.query(query, (err, result) => {
-                if (err) {
-                    return res.status(500).send(err);
-                }
-                res.redirect('/');
-                    // res.json({
-                    //     result:result
-                    // });
+
+            res.render('add-player.ejs', {
+                title: "Enquiry Form",message: 'Thanks for the enquiry'
             });
-                // check the filetype before uploading it
-                // if (uploadedFile.mimetype === 'image/png' || uploadedFile.mimetype === 'image/jpeg' || uploadedFile.mimetype === 'image/gif') {
-                //     // upload the file to the /public/assets/img directory
-                //     uploadedFile.mv(`public/assets/img/${image_name}`, (err ) => {
-                //         if (err) {
-                //             return res.status(500).send(err);
-                //         }
-                //         // send the player's details to the database
-                       
-                //     });
-                // } else {
-                //     message = "Invalid File format. Only 'gif', 'jpeg' and 'png' images are allowed.";
-                //     res.render('add-player.ejs', { message,
-                //         title: "Welcome to Socka | Add a new player"
-                //     });
-                // }
-            }
         });
+       
     },
     editPlayerPage: (req, res) => {
         var playerId = req.params.id;
@@ -79,7 +52,7 @@ module.exports = {
                 return res.status(500).send(err);
             }
             res.render('edit-player.ejs', {
-                title: "Edit Player | Guest CRUD",
+                title: "Edit Player | Guest Query",
                 player: result[0],
                 message: ''
             });
@@ -96,8 +69,9 @@ module.exports = {
         var location = req.body.location;   
         var check_in = req.body.check_in;
         var check_out = req.body.check_out;
+        var updated_at = new Date();
 //UPDATE `booking_queries` SET `first_name` = '" + first_name + "', `last_name` = '" + last_name + "', `username` = '" + username + "', `email` = '" + email + "', `contact_number` = '" + contact_number + "', `number_of_guests` = '" + number_of_guests + "',  `location` = '" + location + "', `check_in` = '" + check_in + "', `check_out` = '" + check_out + "' WHERE `booking_queries`.`id` = '" + playerId + "'"
-        var query = "UPDATE `booking_queries` SET `firstname` = '" + first_name + "', `lastname` = '" + last_name + "', `email` = '" + email + "', `mobile_number` = '" + contact_number + "', `no_of_guests` = '" + number_of_guests + "',  `vista_name` = '" + location + "', `checkin` = '" + check_in + "', `checkout` = '" + check_out + "' WHERE `booking_queries`.`id` = '" + playerId + "'";
+        var query = "UPDATE `booking_queries` SET `firstname` = '" + first_name + "', `lastname` = '" + last_name + "', `email` = '" + email + "', `mobile_number` = '" + contact_number + "', `no_of_guests` = '" + number_of_guests + "',  `vista_name` = '" + location + "', `checkin` = '" + check_in + "', `checkout` = '" + check_out + "', `updated_at` = '" + updated_at + "' WHERE `booking_queries`.`id` = '" + playerId + "'";
         db.query(query, (err, result) => {
             if (err) {
                 return res.status(500).send(err);
@@ -116,20 +90,5 @@ module.exports = {
             }
             res.redirect('/');
         });
-
-        // db.query(getImageQuery, (err, result) => {
-        //     if (err) {
-        //         return res.status(500).send(err);
-        //     }
-
-        //     var image = result[0].image;
-
-        //     fs.unlink(`public/assets/img/${image}`, (err) => {
-        //         if (err) {
-        //             return res.status(500).send(err);
-        //         }
-                
-        //     });
-        // });
     }
 };

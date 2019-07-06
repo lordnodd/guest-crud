@@ -3,6 +3,7 @@ const fileUpload = require('express-fileupload');
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
 const path = require('path');
+const moment = require('moment');
 const app = express();
 
 const {getHomePage} = require('./routes/index');
@@ -38,14 +39,15 @@ app.use(fileUpload()); // configure fileupload
 
 // routes for the app
 
-app.get('/', getHomePage);
-app.get('/add', addPlayerPage);
+app.get('/add', getHomePage);
+app.get('/', addPlayerPage);
 app.get('/edit/:id', editPlayerPage);
 app.get('/delete/:id', deletePlayer);
-app.post('/add', addPlayer);
+app.post('/', addPlayer);
 app.post('/edit/:id', editPlayer);
 
 // set the app to listen on the port
 app.listen(port, () => {
-    console.log(`Server running on port: ${port}`);
+    console.log(`Server running on port: ${port}...`);
+
 });

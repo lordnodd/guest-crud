@@ -1,4 +1,5 @@
 <% include partials/header.ejs %>
+<a class="float-right" href="/" title="Add a New Player">Add a Query</a>    
 <div class="container">
     <% if (message) { %>
         <p class="text-center text-danger"><%= message %></p>
@@ -23,10 +24,11 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="number">Number</label>
-                    <input type="number" class="form-control" name="number" id="number" placeholder="Number" value="<%= player.number %>" required>
+                    <input type="number" class="form-control" name="number" id="number" value="<%= player.number %>" required>
                 </div>
                 <div class="form-group col-md-6">
-                    <input list="pasta"id="location" name="location" class="form-control" placeholder="Choose the loction" required autocomplete=off>
+                    <label for="location">Location</label>
+                    <input list="pasta"id="location" name="location" class="form-control" placeholder="Choose the location" required autocomplete=off>
                         <datalist id="pasta">
                             <option>Kochin</option>
                             <option>Mumbai</option>
@@ -45,7 +47,7 @@
             <button type="submit" class="btn btn-success float-right">Update Journey</button>
         </form>
     <% } else { %>
-        <p class="text-center">Journey Not Found. Go <a href="/add">here</a> to make a trip.</p>
+        <p class="text-center">Query Not Found. Go <a href="/add">here</a> to make a trip.</p>
     <% } %>
 </div>
 </div>

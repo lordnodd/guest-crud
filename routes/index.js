@@ -1,6 +1,6 @@
 module.exports = {
     getHomePage: (req, res) => {
-        var query = "SELECT * FROM `booking_queries` ORDER BY id ASC"; // query database to get all the booking_queries
+        var query = "SELECT * FROM `booking_queries` ORDER BY id DESC"; // query database to get all the booking_queries
 
         // execute query
         db.query(query, (err, result) => {
@@ -8,7 +8,7 @@ module.exports = {
                 res.redirect('/');
             }
             res.render('index.ejs', {
-                title: "Guest CRUD",
+                title: "Guest Query",
                 booking_queries: result
                 
                 
