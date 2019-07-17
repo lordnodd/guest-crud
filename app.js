@@ -3,7 +3,6 @@ const fileUpload = require('express-fileupload');
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
 const path = require('path');
-const moment = require('moment');
 const app = express();
 
 const {getHomePage} = require('./routes/index');

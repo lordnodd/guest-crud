@@ -17,14 +17,13 @@ module.exports = {
         var email = req.body.email;
         var contact_number = req.body.contact_number;
         var number_of_guests= req.body.number_of_guests;
-        var location = req.body.location;   
+        var location = req.body.location;
         var daterange = req.body.daterange;
         daterange = daterange.split(" - ");
         var check_in = daterange[0];
         var check_out = daterange[1];
         var created_at = moment().format('YYYY-MM-DD hh:mm:ss');
         var dummy = 0;
-        console.log(daterange, check_out, check_in);
         check_in = moment(check_in).format('YYYY-MM-DD').toString();
         check_out = moment(check_out).format('YYYY-MM-DD').toString();
     
@@ -41,6 +40,7 @@ module.exports = {
             res.render('add-player.ejs', {
                 title: "Enquiry Form",message: 'Thanks for the enquiry'
             });
+            console.log(result);
         });
        
     },
