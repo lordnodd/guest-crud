@@ -1,5 +1,5 @@
 <% include partials/header.ejs %>
-<a class="float-right" href="/" title="Add a New Player">Add a Query</a>    
+<a class="float-right" href="/" title="Add a New User">Add a Query</a>    
 <div class="table-wrapper">
         <% if (booking_queries.length > 0) {%>
             <table class="table table-hovered">
@@ -19,21 +19,21 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <% booking_queries.forEach((player, index) => { %>
+                    <% booking_queries.forEach((User, index) => { %>
                         <tr>
-                            <th scope="row"><%= player.id %></th>
-                            <!-- <td><img src="/assets/img/<%= player.image %>" class="rounded-circle player-img" alt=""></td> -->
-                            <td><%= player.firstname %></td>
-                            <td><%= player.lastname %></td>
-                            <td><%= player.email %></td>
-                            <td><%= player.mobile_number %></td>
-                            <td><%= player.no_of_guests %></td>
-                            <td>@<%= player.username %></td>
-                            <td><%= player.check_in %></td>
-                            <td><%= player.check_out %></td>
+                            <th scope="row"><%= User.id %></th>
+                            <!-- <td><img src="/assets/img/<%= User.image %>" class="rounded-circle User-img" alt=""></td> -->
+                            <td><%= User.firstname %></td>
+                            <td><%= User.lastname %></td>
+                            <td><%= User.email %></td>
+                            <td><%= User.mobile_number %></td>
+                            <td><%= User.no_of_guests %></td>
+                            <td>@<%= User.username %></td>
+                            <td><%= User.check_in %></td>
+                            <td><%= User.check_out %></td>
                             <td>
-                                <a href="/edit/<%= player.id %>" target="_blank" rel="noopener" class="btn btn-sm btn-success">Edit</a>
-                                <a href="/delete/<%= player.id %>" class="btn btn-sm btn-danger">Delete</a>
+                                <a href="/edit/<%= User.id %>" target="_blank" rel="noopener" class="btn btn-sm btn-success">Edit</a>
+                                <a href="/delete/<%= User.id %>" class="btn btn-sm btn-danger">Delete</a>
                             </td>
                         </tr>
                     <% }) %>

@@ -1,14 +1,14 @@
 const moment = require('moment');
 module.exports = {
-    addPlayerPage: (req, res) => {
+    addUserPage: (req, res) => {
         
-        res.render('add-player.ejs', {
+        res.render('add-User.ejs', {
             title: "Enquiry Form",message: ''
         });
         console.log(moment().format('MM Do YYYY, h:mm:ss '));
         
     },
-    addPlayer: (req, res) => {
+    addUser: (req, res) => {
 
         var message = '';
         var first_name = req.body.first_name;
@@ -36,29 +36,28 @@ module.exports = {
             if (err) {
                 return res.status(500).send(err);
             }
-
-            res.render('add-player.ejs', {
+            res.render('add-User.ejs', {
                 title: "Enquiry Form",message: 'Thanks for the enquiry'
             });
             console.log(result);
         });
        
     },
-    editPlayerPage: (req, res) => {
+    editUserPage: (req, res) => {
         var playerId = req.params.id;
         var query = "SELECT * FROM `booking_queries` WHERE id = '" + playerId + "' ";
         db.query(query, (err, result) => {
             if (err) {
                 return res.status(500).send(err);
             }
-            res.render('edit-player.ejs', {
-                title: "Edit Player | Guest Query",
-                player: result[0],
+            res.render('edit-user.ejs', {
+                title: "Edit User | Guest Query",
+                User: result[0],
                 message: ''
             });
         });
     },
-    editPlayer: (req, res) => {
+    editUser: (req, res) => {
         var playerId = req.params.id;
         var first_name = req.body.first_name;
         var last_name = req.body.last_name;
@@ -79,7 +78,7 @@ module.exports = {
             res.redirect('/');
         });
     },
-    deletePlayer: (req, res) => {
+    deleteUser: (req, res) => {
         var playerId = req.params.id;
         //var getImageQuery = 'SELECT image from `booking_queries` WHERE id = "' + playerId + '"';
         var deleteUserQuery = 'DELETE FROM booking_queries WHERE id = "' + playerId + '"';
